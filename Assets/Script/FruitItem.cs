@@ -1,3 +1,4 @@
+Created Consumable Resource System
 using UnityEngine;
 
 public class FruitItem : MonoBehaviour
