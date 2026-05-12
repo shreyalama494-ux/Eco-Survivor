@@ -11,10 +11,10 @@ public class PlayerHealth : MonoBehaviour
     public Text hpDisplay; 
 
     [Header("Hunger Settings")]
-    public float healthDropRate = 0.01f; // Losing HP very slowly
+    public float healthDropRate = 0.01f;
     public bool isStarving = true;
 
-    private float gracePeriodTimer = 0f; // Timer for the 3-minute pause
+    private float gracePeriodTimer = 0f; 
 
     void Start()
     {
@@ -24,12 +24,10 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        // 1. Handle the 3-minute Grace Period Timer
         if (gracePeriodTimer > 0)
         {
             gracePeriodTimer -= Time.deltaTime;
         }
-        // 2. Only drop health if the timer has run out
         else if (isStarving && health > 0)
         {
             health -= healthDropRate * Time.deltaTime;
@@ -43,8 +41,6 @@ public class PlayerHealth : MonoBehaviour
     {
         health += amount;
         if (health > maxHealth) health = maxHealth;
-
-        // NEW: Set the timer to 180 seconds (3 minutes) whenever fruit is eaten
         gracePeriodTimer = 180f; 
         
         Debug.Log("Ate fruit! Hunger paused for 3 minutes.");
@@ -69,8 +65,6 @@ public class PlayerHealth : MonoBehaviour
         if (hpDisplay != null)
         {
             hpDisplay.text = "HP: " + Mathf.Max(health, 0).ToString("F1");
-            
-            // Visual feedback: If timer is active, maybe make HP green to show it's "Safe"
             if (gracePeriodTimer > 0) hpDisplay.color = Color.green;
             else if (health < 1.5f) hpDisplay.color = Color.red;
             else hpDisplay.color = Color.white;
