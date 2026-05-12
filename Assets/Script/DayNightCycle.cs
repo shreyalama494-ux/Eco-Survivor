@@ -10,7 +10,6 @@ public class DayNightCycle : MonoBehaviour
     public Material skyboxMaterial;
     public GameObject moonVisual;
     
-    // --- ADDED THIS LINE ---
     public GameObject starSystem; 
 
     [Header("UI")]
@@ -91,20 +90,19 @@ public class DayNightCycle : MonoBehaviour
         if (messageText != null)
         {
             messageText.gameObject.SetActive(true);
-            messageText.text = "CONGRATULATIONS!\nYou have successfully survived the island!";
+            messageText.text = "CONGRATULATIONS!\nYou have successfully survived!";
             messageText.color = Color.yellow; 
             messageText.horizontalOverflow = HorizontalWrapMode.Overflow;
             messageText.verticalOverflow = VerticalWrapMode.Overflow;
             messageText.alignment = TextAnchor.MiddleCenter;
         }
 
-        Debug.Log("CONGRATULATIONS! You survived the island!");
+        Debug.Log("CONGRATULATIONS! You survived!");
 
         sun.intensity = 1f;
         moon.intensity = 0f;
         if (moonVisual != null) moonVisual.SetActive(false);
         
-        // --- HIDE STARS ON WIN ---
         if (starSystem != null) starSystem.SetActive(false); 
 
         Cursor.lockState = CursorLockMode.None;
@@ -120,22 +118,18 @@ public class DayNightCycle : MonoBehaviour
         moon.transform.rotation = Quaternion.Euler(sunAngle + 180f, -30f, 0f);
 
         sun.intensity = intensity;
-
-        // --- MOON AND STAR VISIBILITY LOGIC ---
         if (currentPhase == Phase.Night)
         {
             moon.intensity = 1.0f;
             if (moonVisual != null) moonVisual.SetActive(true);
-            
-            // --- SHOW STARS AT NIGHT ---
+            -
             if (starSystem != null) starSystem.SetActive(true); 
         }
         else
         {
             moon.intensity = 0f;
             if (moonVisual != null) moonVisual.SetActive(false);
-            
-            // --- HIDE STARS DURING DAY ---
+      
             if (starSystem != null) starSystem.SetActive(false); 
         }
 
@@ -161,8 +155,7 @@ public class DayNightCycle : MonoBehaviour
         sun.intensity = intensity;
         moon.intensity = 0f;
         if (moonVisual != null) moonVisual.SetActive(false);
-        
-        // --- ENSURE STARS HIDDEN AT START ---
+    
         if (starSystem != null) starSystem.SetActive(false); 
 
         RenderSettings.ambientLight = dayColor;
