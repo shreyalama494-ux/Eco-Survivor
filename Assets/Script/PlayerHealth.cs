@@ -1,4 +1,3 @@
-Implemented Core Player Vitality System
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;

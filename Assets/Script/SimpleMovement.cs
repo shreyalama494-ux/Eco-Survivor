@@ -1,4 +1,3 @@
-Integrated Physics-Based Player Controller
 using UnityEngine;
 
 public class SimpleMovement : MonoBehaviour
